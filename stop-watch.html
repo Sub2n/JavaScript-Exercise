@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Stop watch</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+    .stop-watch {
+      font-family: 'Source Code Pro', monospace;
+      text-align: center;
+      font-size: 3em;
+      padding: 30px;
+    }
+
+    .control {
+      width: 300px;
+      padding: 5px;
+      margin-top: 15px;
+      font-size: 36px;
+      font-weight: bold;
+      border: 2px solid #f44336;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .control:hover {
+      background: #f44336;
+      color: aliceblue;
+    }
+  </style>
+  <title>Stop watch</title>
+</head>
+<body>
+  <div class="stop-watch">
+    <div class="display">00:00:00</div>
+    <button class="control">Start</button>
+  </div>
+  <script>
+    (function () {
+      const $display = document.querySelector('.display');
+      const $control = document.querySelector('.control');
+      let status = 'stop';
+      
+      function stopWatch() {
+        let milisecond = 0;
+        let second = 0;
+        let minute = 0;
+        let miliIntervalID;
+        let secIntervalID;
+        let minIntervalID;
+        let renderIntervalID;
+
+        function increaseMili() {
+          if (milisecond === 99) milisecond = 0;
+          milisecond += 1;
+        }
+
+        function increaseSec() {
+          if (second === 59) second = 0;
+          second += 1;
+        }
+
+        function increaseMin() {
+          if (minute === 59) second = 0;
+          minute += 1;
+        }
+
+        function render() {
+          $display.textContent = `${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}:${milisecond < 10 ? '0' : ''}${milisecond}`;
+        }
+
+        function start() {
+          miliIntervalID = setInterval(increaseMili, 10);
+          secIntervalID = setInterval(increaseSec, 1000);
+          minIntervalID = setInterval(increaseMin, 600000);
+          renderIntervalID = setInterval(render, 10);
+        }
+
+        function stop() {
+          clearInterval(miliIntervalID);
+          clearInterval(secIntervalID);
+          clearInterval(minIntervalID);
+          clearInterval(renderIntervalID);
+        }
+
+        return { start, stop };
+      }
+
+      const myStopWatch = stopWatch();
+
+      $control.addEventListener('click', () => {
+        if (status === 'stop') {
+          myStopWatch.start();
+          status = 'run';
+        } else {
+          myStopWatch.stop();
+          status = 'stop';
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
