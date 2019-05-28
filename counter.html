@@ -42,16 +42,19 @@
   <script>
     const $counterBox = document.querySelector('.container');
     const $counter = document.querySelector('.counter');
+    let counter = 0;
 
     $counterBox.addEventListener('click', (e) => {
       if (!e.target.nodeName === 'BUTTON') return;
     
       if (e.target.classList.contains('increase')) {
-        $counter.textContent = +$counter.textContent + 1;
+        counter += 1;
       }
-      if (e.target.classList.contains('decrease') && $counter.textContent > 0) {
-        $counter.textContent -= 1;
+      if (e.target.classList.contains('decrease') && counter > 0) {
+        counter -= 1;
       }
+    
+      $counter.textContent = counter;
     });
   </script>
 </body>
