@@ -44,47 +44,36 @@
       const $display = document.querySelector('.display');
       const $control = document.querySelector('.control');
       let status = 'stop';
-      
+    
       function stopWatch() {
         let milisecond = 0;
         let second = 0;
         let minute = 0;
-        let miliIntervalID;
-        let secIntervalID;
-        let minIntervalID;
-        let renderIntervalID;
-
-        function increaseMili() {
-          if (milisecond === 99) milisecond = 0;
-          milisecond += 1;
-        }
-
-        function increaseSec() {
-          if (second === 59) second = 0;
-          second += 1;
-        }
-
-        function increaseMin() {
-          if (minute === 59) second = 0;
-          minute += 1;
-        }
+        let timeIntervalID;
 
         function render() {
           $display.textContent = `${minute < 10 ? '0' : ''}${minute}:${second < 10 ? '0' : ''}${second}:${milisecond < 10 ? '0' : ''}${milisecond}`;
         }
 
+        function increasetime() {
+          milisecond += 1;
+          if (milisecond === 100) {
+            milisecond = 0;
+            second += 1;
+          }
+          if (second === 60) {
+            second = 0;
+            minute += 1;
+          }
+          render();
+        }
+    
         function start() {
-          miliIntervalID = setInterval(increaseMili, 10);
-          secIntervalID = setInterval(increaseSec, 1000);
-          minIntervalID = setInterval(increaseMin, 600000);
-          renderIntervalID = setInterval(render, 10);
+          timeIntervalID = setInterval(increasetime, 10);
         }
 
         function stop() {
-          clearInterval(miliIntervalID);
-          clearInterval(secIntervalID);
-          clearInterval(minIntervalID);
-          clearInterval(renderIntervalID);
+          clearInterval(timeIntervalID);
         }
 
         return { start, stop };
