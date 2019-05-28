@@ -42,19 +42,34 @@
   <script>
     const $counterBox = document.querySelector('.container');
     const $counter = document.querySelector('.counter');
-    let counter = 0;
+
+    function counter() {
+      let number = 0;
+
+      function increase() {
+        number += 1;
+      }
+
+      function decrease() {
+        if (number > 0) number -= 1;
+      }
+
+      function render() {
+        $counter.textContent = number;
+      }
+
+      return { increase, decrease, render };
+    }
+    
+    const myCounter = counter();
 
     $counterBox.addEventListener('click', (e) => {
       if (!e.target.nodeName === 'BUTTON') return;
     
-      if (e.target.classList.contains('increase')) {
-        counter += 1;
-      }
-      if (e.target.classList.contains('decrease') && counter > 0) {
-        counter -= 1;
-      }
+      if (e.target.classList.contains('increase')) myCounter.increase();
+      else myCounter.decrease();
     
-      $counter.textContent = counter;
+      myCounter.render();
     });
   </script>
 </body>
