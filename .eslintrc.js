@@ -16,6 +16,7 @@ module.exports = {
       "no-plusplus": [ "error", { "allowForLoopAfterthoughts": true }],
       "comma-dangle": [ "error", "never"],
       "no-var" : 0,
-      "vars-on-top" : 0
+      "vars-on-top" : 0,
+      "func-names" : 0
   }
 };
