@@ -85,9 +85,11 @@
         if (status === 'stop') {
           myStopWatch.start();
           status = 'run';
+          $control.textContent = 'Start';
         } else {
           myStopWatch.stop();
           status = 'stop';
+          $control.textContent = 'Stop';
         }
       });
     }());
