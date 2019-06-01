@@ -1,7 +1,8 @@
 # JavaScript-Exercise
 자바스크립트 예제
 
-### 
+### Exercise
+
 [☞ Toggle Side Nav](https://github.com/Sub2n/JavaScript-Exercise/blob/master/toggle-side-nav.html)
 
 [☞ Counter](https://github.com/Sub2n/JavaScript-Exercise/blob/master/counter.html)
