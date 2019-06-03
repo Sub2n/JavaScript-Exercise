@@ -106,7 +106,7 @@
           this.timeIntervalID = setInterval(this.setTime.bind(this), 1000);
         }
       }
-      
+    
       class AnalogClock extends Clock {
         render() {
           $hour.style.transform = `rotate(${(360 / 12) * this.hour}deg)`;
