@@ -114,9 +114,11 @@
 
       // click된 tab을 active로 만들고 해당 인덱스 tab-content만 보여주기
       activateTab(e) {
-        if (!e.target.classList.contains('tab')) return;
+        let target;
+        if (e.target.classList.contains('tab')) { target = e.target; }
+        else if (e.target.classList.contains('icon')) target = e.target.parentNode;
 
-        const activeIndex = [...this.$tab.firstElementChild.children].indexOf(e.target);
+        const activeIndex = [...this.$tab.firstElementChild.children].indexOf(target);
 
         // // tabsData의 active 프로퍼티 수정
         // this.tabsData.forEach((element, index) => {

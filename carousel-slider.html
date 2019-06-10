@@ -168,8 +168,14 @@
         this.carousel.style.width = this.itemWidth + 'px';
         this.carousel.style.height = this.itemHeight + 'px';
 
-        // 무한 루핑 여부에 따라
-      
+        // 무한 루프면 처음과 마지막 요소를 클론해서 추가
+        if (this.config.infinite) {
+          this.insertClone();
+          this.offset -= this.itemLength;
+          this.moveWithoutAnimation();
+        } else {
+          this.checkMovable();
+        }
 
         /*
           초기 화면에서 나타나는 요소의 크기 조정에 따른 요소의 크기 변화가 보이지 않도록
@@ -192,7 +198,11 @@
         캐러셀 아이템의 첫번째, 마지막 요소를 클론하여 삽입한다.
        */
       insertClone() {
-       
+        const lastItem = this.items[this.items.length - 1];
+        const firstItem = this.items[0];
+
+        this.container.insertBefore(lastItem.cloneNode(true), firstItem);
+        this.container.appendChild(lastItem.cloneNode(true));
       }
       /*
         prev 버튼 이벤트 핸들러
