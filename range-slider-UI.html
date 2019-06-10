@@ -122,11 +122,12 @@
     function rangeHandler(e) {
       // do something!
       if (e.clientX - left > width || right - e.clientX > width) return;
-    
-      $handle.style.transform = `translate3d(${e.clientX - left}px, 0, 0)`;
-      $fill.style.width = `${e.clientX - left}px`;
-      $gradientAngle.innerHTML = `${e.clientX - left}`;
-      $gradient.setAttribute('style', `background-image: linear-gradient(${e.clientX - left}deg, #f1a829, #f14429)`);
+      const currentPos = e.clientX - left;
+      const currentDeg = Math.floor((360 / width) * currentPos);
+      $handle.style.transform = `translate3d(${currentPos}px, 0, 0)`;
+      $fill.style.width = `${(currentPos / width) * 100}%`;
+      $gradientAngle.innerHTML = `${currentDeg}`;
+      $gradient.setAttribute('style', `background-image: linear-gradient(${currentDeg}deg, #f1a829, #f14429)`);
     }
 
     // .range-track 요소의 좌우 영역 내에서 발생한 이벤트만 캐치하기 위해 .range 요소에 이벤트를 등록한다.
@@ -135,7 +136,7 @@
       e.preventDefault();
 
       rangeHandler(e);
-      
+
       // mousedown 이벤트가 발생한 상태에서 mousemove 이벤트가 발생
       $range.addEventListener('mousemove', rangeHandler);
     });
