@@ -171,7 +171,7 @@
         // 무한 루프면 처음과 마지막 요소를 클론해서 추가
         if (this.config.infinite) {
           this.insertClone();
-          this.offset -= this.itemLength;
+          this.offset = -this.itemWidth;
           this.moveWithoutAnimation();
         } else {
           this.checkMovable();
@@ -202,14 +202,30 @@
         const firstItem = this.items[0];
 
         this.container.insertBefore(lastItem.cloneNode(true), firstItem);
-        this.container.appendChild(lastItem.cloneNode(true));
+        this.container.appendChild(firstItem.cloneNode(true));
       }
+
       /*
         prev 버튼 이벤트 핸들러
         이전 슬라이더로 이동하기 위해 carousel-container 요소를 오른쪽으로 이동시킨다.
       */
       moveToPrev() {
-       
+        console.log(this.currentItem);
+        if (this.isTransiting) return;
+
+        this.offset += this.itemWidth;
+        this.currentItem -= 1;
+        this.move();
+
+        if (this.config.infinite) {
+          if (this.isClone()) {
+            this.offset -= this.itemWidth * this.itemLength;
+            setTimeout(() => this.moveWithoutAnimation(), this.config.duration);
+            this.currentItem = this.currentItem + this.itemLength;
+          }
+        } else {
+          this.checkMovable();
+        }
       }
 
       /*
@@ -217,7 +233,22 @@
         다음 슬라이더로 이동하기 위해 carousel-container 요소를 왼쪽으로 이동시킨다.
       */
       moveToNext() {
-        
+        console.log(this.currentItem);
+        if (this.isTransiting) return;
+
+        this.offset -= this.itemWidth;
+        this.currentItem += 1;
+        this.move();
+
+        if (this.config.infinite) {
+          if (this.isClone()) {
+            this.offset += this.itemWidth * this.itemLength;
+            setTimeout(() => this.moveWithoutAnimation(), this.config.duration);
+            this.currentItem = this.currentItem - this.itemLength;
+          }
+        } else {
+          this.checkMovable();
+        }
       }
 
       /*
@@ -227,28 +258,48 @@
         this.currentItem이 this.itemLength + 1이면 마지막 클론 요소
       */
       isClone() {
-        
+        if (this.currentItem === 0 || this.currentItem === this.itemLength + 1) {
+          return true;
+        }
+        return false;
       }
 
       // offset 만큼 carousel-container 요소를 이동시킨다.
       move() {
-        
+        this.isTransiting = true;
+        this.container.style.transition = `transform ${this.config.duration}ms ${this.config.easing}`;
+        this.container.style.transform = `translate3d(${this.offset}px, 0, 0)`;
       }
 
       // offset 만큼 carousel-container 요소를 애니메이션 없이 이동시킨다.
       moveWithoutAnimation() {
-        
+        this.container.style.transition = 'none';
+        this.container.style.transform = `translate3d(${this.offset}px, 0, 0)`;
       }
 
       // prev, next 버튼 활성화/비활성화 결정
       checkMovable() {
+        if (this.currentItem === 1) {
+          this.prev.disabled = true;
+          this.prev.classList.add('disabled');
+        } else {
+          this.prev.disabled = false;
+          this.prev.classList.remove('disabled');
+        }
 
+        if (this.currentItem === this.itemLength) {
+          this.next.disabled = true;
+          this.next.classList.add('disabled');
+        } else {
+          this.next.disabled = false;
+          this.next.classList.remove('disabled');
+        }
       }
     }
 
     window.onload = function () {
-      const carousel = new Carousel();
-      // const carousel = new Carousel({ infinite: false });
+      // const carousel = new Carousel();
+      const carousel = new Carousel({ infinite: false });
     };
   </script>
 </body>
