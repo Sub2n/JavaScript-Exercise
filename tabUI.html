@@ -117,6 +117,7 @@
         let target;
         if (e.target.classList.contains('tab')) { target = e.target; }
         else if (e.target.classList.contains('icon')) target = e.target.parentNode;
+        else return;
 
         const activeIndex = [...this.$tab.firstElementChild.children].indexOf(target);
 
