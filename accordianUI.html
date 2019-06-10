@@ -188,17 +188,25 @@
     // do something!
     // multi open 가능이면
     multiActiveMenu(e) {
-      if (!e.target.classList.contains('menu')) return;
-      e.target.parentNode.classList.toggle('active');
+      let target;
+      if (e.target.classList.contains('menu')) target = e.target;
+      else if (e.target.classList.contains('fa')) target = e.target.parentNode;
+      else return;
+
+      target.parentNode.classList.toggle('active');
       this.render();
     }
 
     singleActiveMenu(e) {
-      if (!e.target.classList.contains('menu')) return;
-      if (e.target.parentNode.classList.contains('active')) e.target.parentNode.classList.remove('active');
+      let target;
+      if (e.target.classList.contains('menu')) target = e.target;
+      else if (e.target.classList.contains('fa')) target = e.target.parentNode;
+      else return;
+
+      if (target.parentNode.classList.contains('active')) target.parentNode.classList.remove('active');
       else {
         [...this.$accordion.children].forEach(menu => menu.classList.remove('active'));
-        e.target.parentNode.classList.toggle('active');
+        target.parentNode.classList.toggle('active');
       }
       this.render();
     }
