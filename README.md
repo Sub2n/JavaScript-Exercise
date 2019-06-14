@@ -11,6 +11,15 @@
 
 [☞ Analog Clock](https://github.com/Sub2n/JavaScript-Exercise/blob/master/analog-clock.html)
 
+### UI Exercise
+
+[☞ Tab UI](https://github.com/Sub2n/JavaScript-Exercise/blob/master/tabUI.html)
+
+[☞ Accordian UI](https://github.com/Sub2n/JavaScript-Exercise/blob/master/accordianUI.html)
+
+[☞ Range Slider](https://github.com/Sub2n/JavaScript-Exercise/blob/master/range-slider-UI.html)
+
+[☞ Carousel Slider](https://github.com/Sub2n/JavaScript-Exercise/blob/master/carousel-slider.html)
 
 ### CRUD Exercise
 
