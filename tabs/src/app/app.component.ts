@@ -99,6 +99,6 @@ export class AppComponent {
   ];
 
   activateTab(index: number) {
-    this.tabs = this.tabs.map((tab, idx) => (idx === index ? { ...tab, active: true } : { ...tab, active: false }));
+    this.tabs = this.tabs.map((tab, tabIndex) => (tabIndex === index ? { ...tab, active: true } : { ...tab, active: false }));
   }
 }
