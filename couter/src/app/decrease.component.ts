@@ -1,28 +1,20 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import {
+  Component, OnInit, Input, EventEmitter, Output
+} from '@angular/core';
 
 @Component({
   selector: 'app-decrease',
   template: `
-    <button class="decrease" (click)="decrease.emit()">-</button>
+    <button class="decrease" (click)="decreaseHandler()">-</button>
   `,
-  styles: [`
-  button {
-    padding: 5px 10px;
-    font-size: 24px;
-    border-radius: 5px;
-    color: #3f51b5;
-    border-color: #3f51b5;
-    outline: none;
-    cursor: pointer;
-  }
-  `]
-})
+  styles: []
+  })
 export class DecreaseComponent implements OnInit {
   @Output() decrease = new EventEmitter<void>();
 
-  constructor() { }
-
-  ngOnInit() {
+  decreaseHandler() {
+    this.decrease.emit();
   }
 
+  ngOnInit() {}
 }
