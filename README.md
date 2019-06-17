@@ -26,3 +26,6 @@
 [☞ Using Ajax and Promise](https://github.com/Sub2n/JavaScript-Exercise/blob/master/ajax-promise.html)
 
 [☞ Using fetch and async/await](https://github.com/Sub2n/JavaScript-Exercise/blob/master/fetch-async-await.html)
+
+### Angular Exercise
+[☞ Counter](https://github.com/Sub2n/JavaScript-Exercise/blob/master/couter/src/app/counter/counter.component.ts)
