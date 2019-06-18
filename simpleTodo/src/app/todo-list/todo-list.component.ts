@@ -8,17 +8,11 @@ import { Todo } from '../todo.interface';
   template: `
     <ul>
       <li *ngFor="let todo of todos">
-        <input
-          id="{{ todo.id }}"
-          type="checkbox"
-          [checked]="todo.completed"
-          (change)="completeTodo(input.id)"
-          #input
-        />
-        <span [ngStyle]="{ 'text-decoration': todo.completed ? 'line-through' : 'none' }">
-          {{ todo.content }}</span
-        >
-        <button id="{{ todo.id }}" (click)="removeTodo(btn.id)" #btn>X</button>
+        <input type="checkbox" [checked]="todo.completed" (change)="completeTodo(todo.id)" />
+        <span [ngStyle]="{ 'text-decoration': todo.completed ? 'line-through' : 'none' }">{{
+          todo.content
+        }}</span>
+        <button (click)="removeTodo(todo.id)">X</button>
       </li>
     </ul>
   `,
@@ -40,11 +34,11 @@ export class TodoListComponent {
 
   @Output() remove = new EventEmitter();
 
-  completeTodo(id: string) {
-    this.complete.emit(+id);
+  completeTodo(id: number) {
+    this.complete.emit(id);
   }
 
-  removeTodo(id: string) {
-    this.remove.emit(+id);
+  removeTodo(id: number) {
+    this.remove.emit(id);
   }
 }
