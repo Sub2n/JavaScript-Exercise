@@ -61,11 +61,11 @@ import { Clock } from '../clock';
   })
 export class AnalogComponent extends Clock {
   hourRotate() {
-    return `rotate(${(360 / 12) * this.hour}deg)`;
+    return `rotate(${(360 / 12) * this.hour + ((360 / 60) * this.minute) / 60}deg)`;
   }
 
   minuteRotate() {
-    return `rotate(${(360 / 60) * this.minute}deg)`;
+    return `rotate(${(360 / 60) * this.minute + ((360 / 60) * this.second) / 60}deg)`;
   }
 
   secondRotate() {
