@@ -21,8 +21,10 @@ import { Clock } from '../clock';
   })
 export class DigitalComponent extends Clock {
   showTime() {
-    return `${this.hour < 10 ? '0' : ''}${this.hour}:${this.minute < 10 ? '0' : ''}${this.minute}:${
+    const isAM = this.hour < 12;
+    const hour = isAM ? this.hour : this.hour - 12;
+    return `${hour < 10 ? '0' : ''}${hour}:${this.minute < 10 ? '0' : ''}${this.minute}:${
       this.second < 10 ? '0' : ''
-    }${this.second}`;
+    }${this.second} ${isAM ? 'AM' : 'PM'}`;
   }
 }
