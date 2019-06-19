@@ -5,11 +5,7 @@ import {
 @Component({
   selector: 'app-b',
   template: `
-    <app-c [content]="fromA" (send)="sendA.emit($event)"></app-c>
+    <app-c></app-c>
   `
   })
-export class BComponent {
-  @Input() fromA: string;
-
-  @Output() sendA = new EventEmitter();
-}
+export class BComponent {}

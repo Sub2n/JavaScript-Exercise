@@ -1,13 +1,12 @@
-import {
-  Component, OnInit, Input, Output, EventEmitter
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-c',
   template: `
     <div>
       <label>C: </label>
-      <input type="text" (input)="send.emit(content)" [(ngModel)]="content" />
+      <input type="text" [value]="getData()" (input)="setData($event.target.value)" />
     </div>
   `,
   styles: [
@@ -30,7 +29,13 @@ import {
   ]
   })
 export class CComponent {
-  @Input() content: string;
+  constructor(private dataService: DataService) {}
 
-  @Output() send = new EventEmitter();
+  setData(data: string) {
+    this.dataService.data = data;
+  }
+
+  getData() {
+    return this.dataService.data;
+  }
 }
