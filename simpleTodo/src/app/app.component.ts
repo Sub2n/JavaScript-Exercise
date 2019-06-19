@@ -7,7 +7,7 @@ import { Todo } from './todo.interface';
     <app-todo-input (add)="addTodo($event)"></app-todo-input>
     <app-todo-list
       [todos]="todos"
-      (complete)="completdTodo($event)"
+      (toggle)="toggleTodo($event)"
       (remove)="removeTodo($event)"
     ></app-todo-list>
     <pre>{{ todos | json }}</pre>
@@ -29,7 +29,7 @@ export class AppComponent {
     this.todos = [{ id: this.generateId(), content, completed: false }, ...this.todos];
   }
 
-  completdTodo(id: number) {
+  toggleTodo(id: number) {
     this.todos = this.todos.map(todo => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
   }
 

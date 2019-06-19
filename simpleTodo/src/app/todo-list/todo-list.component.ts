@@ -30,12 +30,12 @@ import { Todo } from '../todo.interface';
 export class TodoListComponent {
   @Input() todos: Todo[];
 
-  @Output() complete = new EventEmitter();
+  @Output() toggle = new EventEmitter();
 
   @Output() remove = new EventEmitter();
 
   completeTodo(id: number) {
-    this.complete.emit(id);
+    this.toggle.emit(id);
   }
 
   removeTodo(id: number) {
