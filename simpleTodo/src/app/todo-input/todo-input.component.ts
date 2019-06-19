@@ -3,7 +3,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-todo-input',
   template: `
-    <input type="text" placeholder="enter Todo" (keyup.enter)="addTodo(input)" #input />
+    <input type="text" placeholder="enter Todo" (keyup.enter)="addTodo()" [(ngModel)]="content" />
   `,
   styles: [
   `
@@ -17,8 +17,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class TodoInputComponent {
   @Output() add = new EventEmitter();
 
-  addTodo(input: HTMLInputElement) {
-    this.add.emit(input.value);
-    input.value = '';
+  content: string;
+
+  addTodo() {
+    if (this.content !== '') this.add.emit(this.content.trim());
+    this.content = '';
   }
 }
