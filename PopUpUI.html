@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Popup</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+    body {
+      font-family: 'Open Sans';
+      font-weight: 300;
+      background-color: #D6E1E5;
+    }
+
+    h1 {
+      color: #DB5B33;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .popup {
+      position: fixed;
+      right: 0;
+      left: 0;
+      top: 20px;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 520px;
+      min-height: 200px;
+      background-color: #fff;
+      padding: 12px;
+      box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+      z-index: 1000;
+      display: none;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      display: none;
+    }
+
+    .popup.pop,
+    .overlay.pop {
+      display: block;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 16px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>JavaScript Popup</h1>
+
+  <div class="popup">
+    <h1>JavaScript Popup</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam</p>
+    <button class="btn-close">X</button>
+    <input type="text">
+    <button class="btn-ok">OK</button>
+    <button class="btn-cancel">Cancel</button>
+  </div>
+  <div class="overlay"></div>
+
+  <button class="toggle-popup">show popup</button>
+
+  <p class="popup-message"></p>
+  <script>
+    const $togglePop = document.querySelector('.toggle-popup');
+    const $popup = document.querySelector('.popup');
+    const $close = document.querySelector('.btn-close');
+    const $ok = document.querySelector('.btn-ok');
+    const $cancel = document.querySelector('.btn-cancel');
+
+    function open() {
+      $popup.classList.add('pop');
+      $popup.nextElementSibling.classList.add('pop');
+    }
+
+    function close() {
+      $popup.classList.remove('pop');
+      $popup.nextElementSibling.classList.remove('pop');
+    }
+
+    $togglePop.addEventListener('click', open);
+    $close.addEventListener('click', close);
+    $ok.addEventListener('click', close);
+    $cancel.addEventListener('click', close);
+  </script>
+</body>
+
+</html>
