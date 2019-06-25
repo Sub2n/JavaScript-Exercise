@@ -124,12 +124,14 @@
 
   <script>
     const $scroll = document.querySelector('.scoll-icon');
+
     window.onscroll = function () {
       console.log(window.pageYOffset);
       // const yOffset = window.pageYOffset;
       if (window.pageYOffset > 0) $scroll.classList.add('show');
       else $scroll.classList.remove('show');
     };
+
     $scroll.addEventListener('click', () => {
       window.scroll({
         top: 0,
