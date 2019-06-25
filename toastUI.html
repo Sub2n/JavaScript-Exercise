@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Toast UI</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+    body {
+      font-family: 'Open Sans';
+      font-weight: 300;
+      background-color: #D6E1E5;
+    }
+
+    h1 {
+      color: #DB5B33;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .toast {
+      position: absolute;
+      right: 0;
+      box-sizing: border-box;
+      width: 300px;
+      height: 100px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      animation: move 2s both;
+    }
+
+    .toast-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+
+    .toast-error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+
+    .toast-warning {
+      color: #856404;
+      background-color: #fff3cd;
+      border-color: #ffeeba;
+    }
+
+    .close {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      font-size: 1.5em;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .toast-heading {
+      margin-top: 10px;
+    }
+
+    @keyframes move {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>JavaScript Toast</h1>
+
+  <button class="show-success">Success</button>
+  <button class="show-error">Error</button>
+  <button class="show-warning">Warning</button>
+
+  <div class="toast-container"></div>
+  <script>
+    const $success = document.querySelector('.show-success');
+    const $error = document.querySelector('.show-error');
+    const $warning = document.querySelector('.show-warning');
+    const $toast = document.querySelector('.toast-container');
+    let toastArray = [
+      // {id: 0, type: 'success'}
+    ];
+
+    function render() {
+      const toasts = [...$toast.children];
+      toasts.forEach((toast, i, array) => {
+        const lastTop = i === 0 ? 0 : window.getComputedStyle(array[i - 1], null).getPropertyValue('top');
+        const top = i === 0 ? 0 : Math.ceil(lastTop.slice(0, lastTop.length - 2));
+        toast.setAttribute('style', `top: ${top + 100}px`);
+      });
+    }
+
+    function generateId() {
+      return toastArray.length ? Math.max(...toastArray.map(({
+        id
+      }) => id)) + 1 : 1;
+    }
+
+    function addToast(e) {
+      const type = e.target.textContent.toLowerCase();
+      const id = generateId();
+      toastArray = [{
+        id,
+        type
+      }, ...toastArray];
+      const newToast = document.createElement('div');
+      newToast.innerHTML =
+        `<b>${type === 'success' ? 'Well Done' : 'Check It Out!'} ${$toast.childNodes.length}</b>
+        <button class="close">X</button>
+        <p>${type} message</p>`;
+      newToast.className = `toast toast-${type}`;
+      newToast.setAttribute('id', id);
+      if ($toast.lastElementChild) {
+        const lastTop = window.getComputedStyle($toast.lastElementChild, null).getPropertyValue('top');
+        newToast.setAttribute('style', `top: ${Math.ceil(lastTop.slice(0, lastTop.length - 2)) + 100}px`);
+      }
+      $toast.appendChild(newToast);
+      setTimeout(() => {
+        if (![...$toast.children].filter(toast => id === +toast.id)[0]) return;
+        $toast.removeChild([...$toast.children].filter(toast => id === +toast.id)[0]);
+        toastArray = toastArray.filter(toast => toast.id !== id);
+        render();
+      }, 5000);
+    }
+
+    function removeToast(e) {
+      if (!e.target.classList.contains('close')) return;
+      toastArray = toastArray.filter(({
+        id
+      }) => id !== +e.target.id);
+      $toast.removeChild(e.target.parentNode);
+      render();
+    }
+
+    $success.addEventListener('click', addToast);
+    $error.addEventListener('click', addToast);
+    $warning.addEventListener('click', addToast);
+    $toast.addEventListener('click', removeToast);
+  </script>
+</body>
+
+</html>
