@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,8 @@
       overflow: hidden;
       /* carousel 요소의 width/height의 셋팅이 완료될 때까지 감춘다. */
       opacity: 0;
-      border: 1px dotted red; /* for test */
+      border: 1px dotted red;
+      /* for test */
 
     }
 
@@ -80,11 +82,12 @@
     }
 
     /* For Test */
-    #overflow:checked + .carousel {
+    #overflow:checked+.carousel {
       overflow: hidden;
     }
   </style>
 </head>
+
 <body>
   <label for="overflow">carousel <b>overflow: hidden</b></label>
   <input type="checkbox" id="overflow" checked>
@@ -153,10 +156,13 @@
           selector: '.carousel',
           duration: 200,
           easing: 'ease-out',
-          infinite: true, // Infinite loop sliding
+          infinite: true // Infinite loop sliding
         };
 
-        return { ...defaultConfig, ...config };
+        return {
+          ...defaultConfig,
+          ...config
+        };
       }
 
       init() {
@@ -299,7 +305,9 @@
 
     window.onload = function () {
       // const carousel = new Carousel();
-      const carousel = new Carousel({ infinite: false });
+      const carousel = new Carousel({
+        infinite: false
+      });
     };
   </script>
 </body>

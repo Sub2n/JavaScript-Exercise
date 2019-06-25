@@ -11,7 +11,7 @@ export class ShowScrollDirective {
   @HostListener('window:scroll') onScroll() {
     console.log(window.pageYOffset);
 
-    if (window.pageYOffset > 100) {
+    if (window.pageYOffset >= 100) {
       this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
     } else this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
   }
