@@ -12,4 +12,8 @@ export class LoginService {
   getLoginStatus(): Observable<boolean> {
     return of(this.isLogin);
   }
+
+  setLoginStatus(state: boolean) {
+    this.isLogin = state;
+  }
 }
