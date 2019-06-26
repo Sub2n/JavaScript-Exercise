@@ -1,0 +1,65 @@
+.side-bar {
+  background: #b71c1c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 17vw;
+  height: 100vh;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.profile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+}
+
+.profile-box {
+  position: relative;
+  width: 100%;
+  /* desired width */
+}
+
+.profile-box:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  /* initial ratio of 1:1*/
+}
+
+.profile img {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  margin: 20px 0;
+}
+
+.name {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.class {
+  color: #ff9800;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+nav {
+  margin-top: 17vw;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

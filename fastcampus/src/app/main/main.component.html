@@ -1,7 +1,7 @@
 <!-- login 되어있으면 출결페이지
 login 안 되어있으면 login 페이지 보여주기 -->
 <ng-container *ngIf="isLogin; else loginPage">
-  <app-attendance></app-attendance>
+  <app-manage></app-manage>
 </ng-container>
 <ng-template #loginPage>
   <app-login></app-login>

@@ -9,6 +9,7 @@ import { HomeworkComponent } from './homework/homework.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainComponent } from './main/main.component';
   AttendanceComponent,
   HomeworkComponent,
   SideNavComponent,
-  MainComponent
+  MainComponent,
+  ManageComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
