@@ -1,0 +1,23 @@
+<div class="login">
+  <section class="heading-section">
+    <h1>Fastcampus</h1>
+    <p>School Manager</p>
+  </section>
+  <section class="login-section">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+      <fieldset>
+        <legend class="readable-hidden">매니저 로그인 폼</legend>
+        <div class="user-email">
+          <label for="user-email">아이디</label>
+          <input type="email" name="uid" id="user-email" required placeholder="e-mail을 입력하세요." formControlName="id">
+        </div>
+        <div class="user-pw">
+          <label for="user-pw">비밀번호</label>
+          <input type="password" name="upw" id="user-pw" required placeholder="숫자, 문자 포함 6~12자리" formControlName="pw">
+        </div>
+        <button type="submit" class="btn-login" [disabled]="!loginForm.valid">로그인</button>
+      </fieldset>
+    </form>
+  </section>
+
+</div>
