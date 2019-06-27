@@ -8,8 +8,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styles: [
   `
       input {
+        width: 20vw;
         padding: 5px;
-        margin-left: 40px;
+        min-width: 360px;
       }
     `
   ]
