@@ -50,7 +50,7 @@ import { Todo } from '../todo.interface';
       }
       button {
         background: none;
-        border: 1px solid black;
+        border: 1px solid #181818;
         border-radius: 5px;
         height: 30px;
       }
