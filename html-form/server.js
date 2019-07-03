@@ -19,8 +19,17 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/signup', (req, res) => {
-  res.json(req.body);
+app.post('/signin', (req, res) => {
+  if (req.body.email === '95su1208@gmail.com' && req.body.password === '1234') {
+    res.json({
+      success: true
+    });
+  } else {
+    req.json({
+      success: false,
+      message: 'invalid user'
+    });
+  }
 });
 
 app.listen(7000, () => console.log('http://localhost:7000'));

@@ -20,7 +20,7 @@
 </style>
 
 <body>
-  <form action="/signup" method="POST">
+  <form action="/signin" method="POST">
     <div>
       <input class="email-input" type="email" name="email" placeholder="Email" required>
       <span class="email"></span>
@@ -29,7 +29,7 @@
       <input class="pw-input" type="password" id="password" name="password" placeholder="Password" required>
       <span class="pw"></span>
     </div>
-    <button class="submit" type="submit">Signup</button>
+    <button class="submit" type="submit">Signin</button>
   </form>
   <script>
     const $email = document.querySelector('.email-input');
@@ -41,10 +41,7 @@
     let pwValid = false;
 
     function formValidate() {
-      console.log(emailValid, pwValid);
-
-      if (emailValid && pwValid) $submit.removeAttribute('disabled');
-      else $submit.setAttribute('disabled', true);
+      $submit.disabled = emailValid && pwValid ? false : true;
     }
 
     function emailValidate() {
@@ -75,8 +72,8 @@
       formValidate();
     }
 
-    $email.addEventListener('keyup', emailValidate);
-    $pw.addEventListener('keyup', pwValidate);
+    $email.addEventListener('change', emailValidate);
+    $pw.addEventListener('change', pwValidate);
   </script>
 </body>
 
