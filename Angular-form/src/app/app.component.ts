@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   template: `
-    <form>
-      <input type="text" placeholder="email" />
-      <input type="password" placeholder="password" />
-      <button>Submit</button>
-    </form>
+    <app-user-form></app-user-form>
   `
   })
-export class AppComponent {}
+export class AppComponent {
+  onSubmit(form: NgForm) {
+    console.log(form);
+  }
+}
