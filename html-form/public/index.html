@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Signup</title>
+</head>
+<style>
+  .email.invalidate,
+  .pw.invalidate {
+    color: red;
+  }
+
+  .email,
+  .pw {
+    color: green;
+  }
+</style>
+
+<body>
+  <form action="/signup" method="POST">
+    <div>
+      <input class="email-input" type="email" name="email" placeholder="Email" required>
+      <span class="email"></span>
+    </div>
+    <div>
+      <input class="pw-input" type="password" id="password" name="password" placeholder="Password" required>
+      <span class="pw"></span>
+    </div>
+    <button class="submit" type="submit">Signup</button>
+  </form>
+  <script>
+    const $email = document.querySelector('.email-input');
+    const $pw = document.querySelector('.pw-input');
+    const $emailAlert = document.querySelector('.email');
+    const $pwAlert = document.querySelector('.pw');
+    const $submit = document.querySelector('.submit');
+    let emailValid = false;
+    let pwValid = false;
+
+    function formValidate() {
+      console.log(emailValid, pwValid);
+
+      if (emailValid && pwValid) $submit.removeAttribute('disabled');
+      else $submit.setAttribute('disabled', true);
+    }
+
+    function emailValidate() {
+      const reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+      if (!reg.test($email.value)) {
+        $emailAlert.classList.add('invalidate');
+        $emailAlert.textContent = '올바른 email 형식을 입력하세요.';
+        emailValid = false;
+      } else {
+        $emailAlert.classList.remove('invalidate');
+        $emailAlert.textContent = 'email OK';
+        emailValid = true;
+      }
+      formValidate();
+    }
+
+    function pwValidate() {
+      const reg = /^[A-Za-z0-9]{4,10}$/;
+      if (!reg.test($pw.value)) {
+        $pwAlert.classList.add('invalidate');
+        $pwAlert.textContent = '알파벳 대소문자 또는 숫자로 이루어진 4 ~10자리';
+        pwValid = false;
+      } else {
+        $pwAlert.classList.remove('invalidate');
+        $pwAlert.textContent = 'pw OK';
+        pwValid = true;
+      }
+      formValidate();
+    }
+
+    $email.addEventListener('keyup', emailValidate);
+    $pw.addEventListener('keyup', pwValidate);
+  </script>
+</body>
+
+</html>
