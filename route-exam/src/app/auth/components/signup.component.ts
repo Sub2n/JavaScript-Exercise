@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-signup',
   template: `
     <app-navigation></app-navigation>
-
     <p>
       signin works!
     </p>
