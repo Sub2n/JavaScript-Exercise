@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup, FormControl, Validators, FormBuilder
+} from '@angular/forms';
 import { PasswordValidator } from './password-validator';
 
 @Component({
@@ -20,35 +22,58 @@ import { PasswordValidator } from './password-validator';
 
     <pre>passwordGroup.errors: {{ passwordGroup.errors | json }}</pre>
     <pre>passwordGroup.valid: {{ passwordGroup.valid }}</pre>
-
+    <!--
     <pre>password.errors: {{ password.errors | json }}</pre>
     <pre>password.valid: {{ password.valid }}</pre>
 
     <pre>confirmpassword.errors: {{ confirmpassword.errors | json }}</pre>
     <pre>confirmpassword.valid: {{ confirmpassword.valid }}</pre>
+    -->
   `,
   styles: []
   })
 export class AppComponent implements OnInit {
   userForm: FormGroup;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.userForm = new FormGroup({
-      userid: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]),
-      passwordGroup: new FormGroup(
+    // this.userForm = new FormGroup({
+    //   userid: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]),
+    //   passwordGroup: new FormGroup(
+    //     {
+    //       password: new FormControl('', [
+    //         Validators.required,
+    //         Validators.pattern('[a-zA-Z]{4,10}')
+    //       ]),
+    //       confirmPassword: new FormControl('', [
+    //         Validators.required,
+    //         Validators.pattern('[a-zA-Z]{4,10}')
+    //       ])
+    //     },
+    //     PasswordValidator.match
+    //   )
+    // });
+
+    // this.userForm = this.fb.group({
+    //   userid: ['', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]],
+    //   passwordGroup: this.fb.group(
+    //     {
+    //       password: ['', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]],
+    //       comfirmPassword: ['', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]]
+    //     },
+    //     { validators: PasswordValidator.match }
+    //   )
+    // });
+
+    this.userForm = this.fb.group({
+      userid: ['', [Validators.required, Validators.pattern('[a-zA-Z]{4,10}')]],
+      passwordGroup: this.fb.group(
         {
-          password: new FormControl('', [
-            Validators.required,
-            Validators.pattern('[a-zA-Z]{4,10}')
-          ]),
-          confirmPassword: new FormControl('', [
-            Validators.required,
-            Validators.pattern('[a-zA-Z]{4,10}')
-          ])
+          password: ['', Validators.required],
+          confirmPassword: ['', Validators.required]
         },
-        PasswordValidator.match
+        { validators: PasswordValidator.match }
       )
     });
   }
