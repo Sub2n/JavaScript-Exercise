@@ -1,5 +1,5 @@
 # JavaScript-Exercise
-자바스크립트 예제 풀이 
+자바스크립트 예제 풀이 !!
 
 ### Exercise
 
